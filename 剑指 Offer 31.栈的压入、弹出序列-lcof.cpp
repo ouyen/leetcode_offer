@@ -11,23 +11,24 @@ class Solution {
 public:
     bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
         stack<int> main_stack;
-        int pushed_index=0;
-        int popped_index=0;
-        while(pushed_index<pushed.size() && popped_index<popped.size()){
-            while (pushed_index<pushed.size() && pushed[pushed_index]!=popped[popped_index]){
+        auto pushed_index=pushed.begin();
+        auto popped_index=popped.begin();
+
+        while(pushed_index<pushed.end() && popped_index<popped.end()){
+            while (pushed_index<pushed.end() && *pushed_index!=*popped_index){
                 /* code */
-                main_stack.push(pushed[pushed_index]);
+                main_stack.push(*pushed_index);
                 ++pushed_index;
             }
-            if(pushed_index==pushed.size()) return false;
+            if(pushed_index==pushed.end()) return false;
             ++pushed_index;// match
             ++popped_index;
-            while(!main_stack.empty() && popped_index<popped.size() && main_stack.top()==popped[popped_index]){
+            while(!main_stack.empty() && popped_index<popped.end() && main_stack.top()==*popped_index){
                 main_stack.pop();
                 ++popped_index;
             }
         }
-        if(main_stack.empty()&& pushed_index==pushed.size()&& popped_index==popped.size())
+        if(main_stack.empty()&& pushed_index==pushed.end() && popped_index==popped.end())
             return true;
         return false;
         
