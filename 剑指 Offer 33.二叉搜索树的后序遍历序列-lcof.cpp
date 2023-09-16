@@ -13,9 +13,12 @@ class Solution {
         return verifyPostorder_helper(postorder, 0, postorder.size() - 1);
     }
     bool verifyPostorder_helper(vector<int>& postorder, int start, int end) {
-        if (start == end)
-            return true;
-        if (start > end) {
+        // if (start == end)
+        //     return true;
+        // if (start > end) {
+        //     return true;
+        // }
+        if(start+1>=end){
             return true;
         }
         int root = postorder[end];
