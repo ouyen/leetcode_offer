@@ -10,7 +10,7 @@ using namespace std;
 class LRUCache {
     int _capacity=0;
     int _curr_capacity=0;
-    bool _not_full = true;
+    // bool _not_full = true;
     list<pair<int,int>> link_list={};
     unordered_map<int,list<pair<int,int>>::iterator> dict;
     void move_to_head(list<pair<int,int>>::iterator node){
@@ -35,7 +35,7 @@ public:
             link_list.push_front(make_pair(key,value));
             dict[key]=link_list.begin();
             ++_curr_capacity;
-            if(_not_full==false ||_curr_capacity>_capacity){
+            if(_curr_capacity>_capacity){
                 dict.erase(link_list.back().first);
                 link_list.pop_back();
                 --_curr_capacity;
